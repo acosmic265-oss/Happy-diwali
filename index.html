@@ -1,0 +1,836 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10070b">
+<title>A Royal Diwali | A Special Wish</title>
+
+<!-- Stylish, readable fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --gold: #e5c17b;
+    --light-gold: #f8e6b5;
+    --dark: #10070b;
+    --burgundy: #3b101e;
+    --cream: #fff3dc;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at top, #401523 0%, transparent 55%),
+        linear-gradient(135deg, #10070b, #1c0b13 55%, #090509);
+    color: var(--cream);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Fireworks canvas */
+#fireworks {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* Floating golden particles */
+.particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    bottom: -20px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 12px var(--gold);
+    animation: floatUp linear infinite;
+    opacity: .65;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(0) scale(.5);
+        opacity: 0;
+    }
+    20% { opacity: .8; }
+    to {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+    }
+}
+
+/* Main layout */
+.wrapper {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 22px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(229,193,123,.18);
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    color: var(--gold);
+}
+
+.logo span {
+    color: white;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: 1px solid rgba(229,193,123,.35);
+    color: var(--light-gold);
+    border-radius: 50px;
+    padding: 9px 16px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.nav-btn:hover {
+    background: var(--gold);
+    color: #1a0b10;
+    box-shadow: 0 0 20px rgba(229,193,123,.35);
+}
+
+/* Pages */
+.page {
+    display: none;
+    flex: 1;
+    min-height: 78vh;
+    padding: 55px 20px;
+    align-items: center;
+    justify-content: center;
+    animation: pageIn .7s ease;
+}
+
+.page.active {
+    display: flex;
+}
+
+@keyframes pageIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Royal card */
+.royal-card {
+    width: 100%;
+    max-width: 760px;
+    padding: 55px 35px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(229,193,123,.65);
+    outline: 1px solid rgba(229,193,123,.16);
+    outline-offset: 9px;
+    background:
+        linear-gradient(145deg, rgba(70,20,36,.82), rgba(17,7,12,.94));
+    box-shadow:
+        0 20px 70px rgba(0,0,0,.45),
+        inset 0 0 45px rgba(229,193,123,.045);
+    border-radius: 160px 160px 25px 25px;
+}
+
+.royal-card::before,
+.royal-card::after {
+    content: "✦";
+    position: absolute;
+    color: var(--gold);
+    font-size: 22px;
+}
+
+.royal-card::before {
+    top: 20px;
+    left: 25px;
+}
+
+.royal-card::after {
+    bottom: 20px;
+    right: 25px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 800;
+    color: var(--light-gold);
+    line-height: 1.05;
+}
+
+h1 {
+    font-size: clamp(48px, 9vw, 88px);
+    letter-spacing: 1px;
+    text-shadow: 0 5px 25px rgba(229,193,123,.16);
+}
+
+h2 {
+    font-size: clamp(37px, 6vw, 57px);
+    margin-bottom: 18px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+.gold-line {
+    width: 90px;
+    height: 2px;
+    margin: 25px auto;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.description {
+    max-width: 520px;
+    margin: 0 auto;
+    color: #e8d9c7;
+    font-size: 13px;
+    line-height: 2;
+    font-weight: 500;
+}
+
+.diya {
+    font-size: 52px;
+    margin: 20px 0;
+    display: inline-block;
+    filter: drop-shadow(0 0 18px rgba(255,174,55,.45));
+    animation: diyaGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes diyaGlow {
+    from { transform: scale(1); filter: drop-shadow(0 0 8px #d99a39); }
+    to { transform: scale(1.1); filter: drop-shadow(0 0 25px #ffbd54); }
+}
+
+/* Round buttons */
+.button-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.round-btn {
+    min-width: 145px;
+    min-height: 48px;
+    padding: 13px 24px;
+    border: 1px solid var(--gold);
+    border-radius: 50px;
+    background: linear-gradient(135deg, #e5c17b, #a97835);
+    color: #1b0b10;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .3s ease;
+    box-shadow: 0 5px 22px rgba(229,193,123,.18);
+}
+
+.round-btn:hover {
+    transform: translateY(-4px) scale(1.04);
+    box-shadow: 0 0 28px rgba(229,193,123,.45);
+}
+
+.round-btn.secondary {
+    color: var(--light-gold);
+    background: transparent;
+}
+
+.round-btn.secondary:hover {
+    background: rgba(229,193,123,.12);
+}
+
+/* Name entry */
+.name-input {
+    width: min(100%, 360px);
+    padding: 16px 22px;
+    margin-top: 25px;
+    border: 1px solid rgba(229,193,123,.65);
+    border-radius: 50px;
+    outline: none;
+    background: rgba(10,4,8,.65);
+    color: white;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.name-input:focus {
+    box-shadow: 0 0 20px rgba(229,193,123,.2);
+}
+
+.name-input::placeholder {
+    color: #bba58e;
+}
+
+/* Personalized note */
+.note-card {
+    max-width: 700px;
+    padding: 48px 38px;
+    text-align: left;
+    border: 1px solid rgba(229,193,123,.55);
+    border-radius: 24px;
+    background:
+        linear-gradient(145deg, rgba(64,19,34,.94), rgba(17,7,12,.97));
+    box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+
+.note-card .eyebrow {
+    text-align: center;
+}
+
+.note-card h2 {
+    text-align: center;
+}
+
+.note-text {
+    color: #f4e5d0;
+    font-family: 'Caveat', cursive;
+    font-size: clamp(23px, 4vw, 30px);
+    font-weight: 600;
+    line-height: 1.55;
+    white-space: pre-line;
+}
+
+.note-sign {
+    margin-top: 25px;
+    color: var(--gold);
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    text-align: right;
+}
+
+/* About page */
+.about-card {
+    max-width: 680px;
+}
+
+.about-text {
+    color: #e8d9c7;
+    font-size: 13px;
+    line-height: 2.1;
+    max-width: 520px;
+    margin: 0 auto;
+    font-weight: 500;
+}
+
+.about-highlight {
+    color: var(--gold);
+    font-weight: 800;
+}
+
+/* Footer */
+footer {
+    padding: 22px 15px;
+    text-align: center;
+    color: #a88f79;
+    font-size: 9px;
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(229,193,123,.15);
+}
+
+footer span {
+    color: var(--gold);
+}
+
+/* Mobile */
+@media(max-width: 600px) {
+    header {
+        padding: 18px 5%;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-btn {
+        padding: 8px 12px;
+        font-size: 9px;
+    }
+
+    .page {
+        padding: 40px 20px;
+    }
+
+    .royal-card {
+        padding: 55px 22px;
+        border-radius: 110px 110px 22px 22px;
+    }
+
+    .note-card {
+        padding: 35px 23px;
+    }
+
+    .description {
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+<div class="particles" id="particles"></div>
+
+<div class="wrapper">
+
+<header>
+    <div class="logo">ABHILASHA<span>.</span></div>
+
+    <nav>
+        <button class="nav-btn" onclick="showPage('home')">HOME</button>
+        <button class="nav-btn" onclick="showPage('question')">SPECIAL</button>
+        <button class="nav-btn" onclick="showPage('about')">ABOUT</button>
+    </nav>
+</header>
+
+<!-- PAGE 1: HOME -->
+<section class="page active" id="home">
+    <div class="royal-card">
+        <div class="eyebrow">A festival of lights & happiness</div>
+
+        <div class="diya">🪔</div>
+
+        <h1>Happy<br>Diwali</h1>
+
+        <div class="gold-line"></div>
+
+        <p class="description">
+            May every diya light up a new hope,
+            every sparkle bring a beautiful moment,
+            and every celebration make your life
+            a little more magical.
+        </p>
+
+        <div class="diya">✨</div>
+
+        <div class="button-row">
+            <button class="round-btn" onclick="showPage('question')">
+                OPEN YOUR WISH ✦
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- PAGE 2: NAME ENTRY -->
+<section class="page" id="question">
+    <div class="royal-card">
+        <div class="eyebrow">A little question for you</div>
+
+        <h2>Are you one of the closest people to me?</h2>
+
+        <div class="gold-line"></div>
+
+        <p class="description">
+            Some people make ordinary days special.
+            And maybe you are one of those people.
+            Enter your name and discover your little surprise.
+        </p>
+
+        <input
+            type="text"
+            id="visitorName"
+            class="name-input"
+            placeholder="Enter your name here..."
+            autocomplete="off"
+        >
+
+        <div class="button-row">
+            <button class="round-btn" onclick="openNote()">
+                REVEAL MY WISH ✨
+            </button>
+            <button class="round-btn secondary" onclick="showPage('home')">
+                GO BACK
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- PAGE 3: PERSONALIZED NOTE -->
+<section class="page" id="note">
+    <div class="note-card">
+        <div class="eyebrow">A message from my heart</div>
+
+        <h2 id="noteTitle">A Special Note</h2>
+
+        <div class="gold-line"></div>
+
+        <div class="note-text" id="noteText"></div>
+
+        <div class="note-sign">
+            With warm wishes, <br>
+            Abhilasha ❤️
+        </div>
+
+        <div class="button-row">
+            <button class="round-btn" onclick="showPage('about')">
+                KNOW ABOUT ME
+            </button>
+            <button class="round-btn secondary" onclick="showPage('question')">
+                TRY AGAIN
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- PAGE 4: ABOUT ME -->
+<section class="page" id="about">
+    <div class="royal-card about-card">
+        <div class="eyebrow">Behind this little celebration</div>
+
+        <div class="diya">🌙</div>
+
+        <h2>Hey, I'm Abhilasha!</h2>
+
+        <div class="gold-line"></div>
+
+        <p class="about-text">
+            I'm an <span class="about-highlight">overthinker girl</span>,
+            a dreamer, and someone who finds meaning in the smallest things.
+
+            <br><br>
+
+            I love observing people, exploring new ideas,
+            creating things, and turning random thoughts
+            into something meaningful.
+
+            <br><br>
+
+            Sometimes I think too much, sometimes I laugh
+            at the smallest things, and sometimes I get lost
+            in my own world.
+
+            <br><br>
+
+            But one thing I truly believe:
+            <span class="about-highlight">
+            little gestures can create the biggest smiles.
+            </span>
+
+            <br><br>
+
+            This little website is my way of sending
+            a special Diwali wish to the people who make
+            life a little more beautiful.
+        </p>
+
+        <div class="diya">🪔</div>
+
+        <div class="button-row">
+            <button class="round-btn" onclick="showPage('home')">
+                BACK TO BEGINNING
+            </button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    MADE WITH <span>♥</span> & A LITTLE DIWALI MAGIC
+</footer>
+
+</div>
+
+<script>
+/* PAGE NAVIGATION */
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    createFirework(
+        window.innerWidth / 2,
+        window.innerHeight / 2
+    );
+}
+
+/* PERSONALIZED NOTES */
+const notes = {
+    sujal: {
+        title: "For Sujal 😂❤️",
+        message: `Sujal, tu bhi kamaal ka insaan hai! 😂❤️
+
+Har baat mein "mere saath bhi same hai" bolne ki teri aadat alag hi level ki hai. Kabhi-kabhi lagta hai hum dono ki life ka scriptwriter ek hi hai! 😂
+
+But jokes apart, thanks for being supportive and always matching my energy. Tera support, chhoti-chhoti reactions aur saath dene ka tareeka genuinely matter karta hai.
+
+Bas aise hi rehna, thoda kam meri copy karna aur apni originality bhi dikhana! 😂
+
+May this Diwali bring you endless happiness, success and lots of beautiful moments.
+
+Happy Diwali, Sujal! 🪔✨
+
+P.S. Agli baar "mere saath bhi same hai" bolne se pehle thoda soch lena! 😂`
+    },
+
+    saanvi: {
+        title: "For Saanvi ❤️",
+        message: `Some people make your little achievements feel special, and you're one of them. ❤️
+
+Thank you for always supporting me, reacting to my posts and appreciating even the smallest things I share. Maybe you don't realise it, but your little gestures genuinely bring a smile and motivate me to keep going.
+
+I'm really grateful to have someone like you cheering me on. May this Diwali bring you endless happiness, beautiful opportunities and everything your heart wishes for.
+
+Stay the way you are — kind, supportive and amazing.
+
+Happy Diwali, meri supportive sister! 🪔✨
+
+P.S. Never stop spreading your positive energy! ❤️`
+    }
+};
+
+function openNote() {
+    const nameInput = document.getElementById('visitorName');
+    const name = nameInput.value.trim();
+
+    if (!name) {
+        nameInput.focus();
+        nameInput.placeholder = "Please enter your name first!";
+        return;
+    }
+
+    const normalizedName = name.toLowerCase();
+
+    let selectedNote;
+
+    if (normalizedName === "sujal") {
+        selectedNote = notes.sujal;
+    } else if (normalizedName === "saanvi") {
+        selectedNote = notes.saanvi;
+    } else {
+        selectedNote = {
+            title: `For ${name} ✨`,
+            message: `Hey ${name}! ❤️
+
+Every person brings something different into our lives, and I'm glad our paths crossed.
+
+May this Diwali fill your life with happiness, peace, success and beautiful memories.
+
+Keep smiling, keep growing, and never stop being yourself.
+
+Wishing you a wonderful and sparkling Diwali! 🪔✨`
+        };
+    }
+
+    document.getElementById('noteTitle').textContent =
+        selectedNote.title;
+
+    document.getElementById('noteText').textContent =
+        selectedNote.message;
+
+    showPage('note');
+}
+
+/* PRESS ENTER TO SUBMIT NAME */
+document.getElementById('visitorName').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        openNote();
+    }
+});
+
+/* FLOATING PARTICLES */
+const particleContainer = document.getElementById('particles');
+
+for (let i = 0; i < 35; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDuration = (5 + Math.random() * 10) + 's';
+    particle.style.animationDelay = (Math.random() * 10) + 's';
+    particle.style.width = (2 + Math.random() * 4) + 'px';
+    particle.style.height = particle.style.width;
+
+    particleContainer.appendChild(particle);
+}
+
+/* FIREWORKS ENGINE */
+const canvas = document.getElementById('fireworks');
+const ctx = canvas.getContext('2d');
+
+let width, height;
+let fireworks = [];
+let particles = [];
+
+function resizeCanvas() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+}
+
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class FireworkParticle {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 4 + 1;
+
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.alpha = 1;
+        this.decay = Math.random() * .018 + .012;
+        this.size = Math.random() * 2 + 1;
+    }
+
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        this.vx *= .98;
+        this.vy *= .98;
+        this.vy += .025;
+
+        this.alpha -= this.decay;
+    }
+
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(this.alpha, 0);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = this.color;
+
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+    }
+}
+
+function createFirework(x, y) {
+    const colors = [
+        '#e5c17b',
+        '#ffdf9e',
+        '#f4a7a7',
+        '#ffffff',
+        '#dba7ff'
+    ];
+
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    for (let i = 0; i < 65; i++) {
+        particles.push(new FireworkParticle(x, y, color));
+    }
+}
+
+function animateFireworks() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach((particle, index) => {
+        particle.update();
+        particle.draw();
+
+        if (particle.alpha <= 0) {
+            particles.splice(index, 1);
+        }
+    });
+
+    requestAnimationFrame(animateFireworks);
+}
+
+animateFireworks();
+
+/* CLICK OR TOUCH ANYWHERE FOR FIREWORKS */
+function handleInteraction(event) {
+    const x = event.clientX;
+    const y = event.clientY;
+
+    createFirework(x, y);
+}
+
+document.addEventListener('click', handleInteraction);
+
+document.addEventListener('touchstart', function(event) {
+    const touch = event.touches[0];
+
+    if (touch) {
+        createFirework(touch.clientX, touch.clientY);
+    }
+}, { passive: true });
+
+/* AUTOMATIC SMALL FIREWORKS */
+setInterval(() => {
+    if (Math.random() > .4) {
+        createFirework(
+            Math.random() * width,
+            Math.random() * height * .65
+        );
+    }
+}, 2200);
+</script>
+
+</body>
+</html>
